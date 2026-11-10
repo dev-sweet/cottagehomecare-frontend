@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AppShell } from "@/components/layout/app-shell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Doctor Tracker",
   },
   description:
-    "Doctor Tracker Phase 1 — Premium clinical management frontend for tracking physicians, patient caseloads, and hospital telemetry.",
+    "Doctor Tracker — Administrative healthcare web application for managing doctors and patients.",
 };
 
 export default function RootLayout({
@@ -33,7 +32,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-slate-50 text-slate-900 font-sans">
-        <AppShell>{children}</AppShell>
+        {children}
       </body>
     </html>
   );

@@ -1,30 +1,17 @@
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight, UserCheck, Stethoscope } from "lucide-react";
+import { ArrowRight, Stethoscope, Building2 } from "lucide-react";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Avatar } from "@/components/ui/avatar";
+} from "@/components/ui/Card";
+import { Avatar } from "@/components/ui/Avatar";
 import { MOCK_DOCTORS } from "@/lib/mock-data";
-import { DoctorStatus } from "@/lib/types";
-
-const statusConfig: Record<
-  DoctorStatus,
-  { label: string; variant: "success" | "warning" | "secondary" | "destructive" }
-> = {
-  available: { label: "On Duty", variant: "success" },
-  in_surgery: { label: "In Surgery", variant: "warning" },
-  off_duty: { label: "Off Duty", variant: "secondary" },
-  on_leave: { label: "On Leave", variant: "destructive" },
-};
 
 export function RecentDoctors() {
-  // Show first 4 doctors on the dashboard
   const doctors = MOCK_DOCTORS.slice(0, 4);
 
   return (
@@ -32,20 +19,20 @@ export function RecentDoctors() {
       <CardHeader className="pb-3 flex flex-row items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
-            <UserCheck className="h-4 w-4" />
+            <Stethoscope className="h-4 w-4" />
           </div>
           <div>
             <CardTitle className="text-base font-bold text-slate-900">
-              Active Doctors
+              Doctors Overview
             </CardTitle>
             <CardDescription className="text-xs text-slate-500">
-              Duty status & assigned department roster
+              Registered physicians and assigned hospital
             </CardDescription>
           </div>
         </div>
 
         <Link
-          href="/doctors"
+          href="/dashboard/doctors"
           className="text-xs font-semibold text-teal-600 hover:text-teal-700 flex items-center gap-1 group"
         >
           <span>View All</span>
@@ -56,8 +43,6 @@ export function RecentDoctors() {
       <CardContent className="pt-1 flex-1">
         <div className="divide-y divide-slate-100">
           {doctors.map((doctor) => {
-            const status = statusConfig[doctor.status];
-
             return (
               <div
                 key={doctor.id}
@@ -74,22 +59,18 @@ export function RecentDoctors() {
                       {doctor.name}
                     </p>
                     <p className="text-[11px] text-slate-500 truncate flex items-center gap-1">
-                      <Stethoscope className="h-3 w-3 text-slate-400" />
-                      {doctor.specialty} • {doctor.officeRoom}
+                      <span>{doctor.specialization}</span>
+                      <span>&bull;</span>
+                      <Building2 className="h-3 w-3 text-slate-400" />
+                      <span className="truncate">{doctor.hospital}</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2.5 shrink-0">
-                  <div className="text-right hidden sm:block">
-                    <p className="text-xs font-bold text-slate-800">
-                      {doctor.patientsCount}
-                    </p>
-                    <p className="text-[10px] text-slate-400">Patients</p>
-                  </div>
-                  <Badge variant={status.variant} className="text-[10px] px-2">
-                    {status.label}
-                  </Badge>
+                <div className="text-right shrink-0">
+                  <span className="inline-flex items-center rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-semibold text-teal-700 border border-teal-200">
+                    {doctor.patientsCount} patients
+                  </span>
                 </div>
               </div>
             );
@@ -99,4 +80,3 @@ export function RecentDoctors() {
     </Card>
   );
 }
-

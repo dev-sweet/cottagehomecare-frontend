@@ -2,7 +2,13 @@
 
 import * as React from "react";
 import { Info, BarChart3 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/Card";
 import { MOCK_DOCTOR_WORKLOAD } from "@/lib/mock-data";
 import { DoctorWorkload } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -23,7 +29,7 @@ export function PatientsPerDoctorChart() {
                 Patients Per Doctor
               </CardTitle>
               <CardDescription className="text-xs text-slate-500">
-                Active patient caseload and clinical capacity utilization
+                Active patient volume and allocation per physician
               </CardDescription>
             </div>
           </div>
@@ -38,7 +44,7 @@ export function PatientsPerDoctorChart() {
       </CardHeader>
 
       <CardContent className="pt-2 flex-1 flex flex-col justify-between">
-        <div className="space-y-3.5">
+        <div className="space-y-3">
           {MOCK_DOCTOR_WORKLOAD.map((item) => {
             const isHigh = item.utilizationPercent >= 88;
             const isHovered = activeItem?.id === item.id;
@@ -61,13 +67,13 @@ export function PatientsPerDoctorChart() {
                       {item.doctorName}
                     </span>
                     <span className="text-[11px] text-slate-400">
-                      • {item.specialty}
+                      &bull; {item.specialization} ({item.hospital})
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-slate-900 text-xs">
-                      {item.activePatients}
+                      {item.patientCount}
                     </span>
                     <span className="text-[11px] text-slate-400">
                       / {item.capacityLimit} pts
@@ -102,13 +108,12 @@ export function PatientsPerDoctorChart() {
           })}
         </div>
 
-        {/* Dynamic / active hint */}
         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
           <div className="flex items-center gap-1.5">
             <Info className="h-3.5 w-3.5 text-slate-400" />
-            <span>Target ratio: 60-80 patients per senior physician</span>
+            <span>Target ratio: ~60 patients per registered physician</span>
           </div>
-          <span className="font-medium text-teal-700">8 Senior Staff</span>
+          <span className="font-medium text-teal-700">8 Sample Doctors</span>
         </div>
       </CardContent>
     </Card>

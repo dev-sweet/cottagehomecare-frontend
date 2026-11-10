@@ -2,13 +2,13 @@ import * as React from "react";
 import {
   Stethoscope,
   Users,
+  BarChart3,
   CalendarCheck,
-  Activity,
   ArrowUpRight,
   ArrowDownRight,
   TrendingUp,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { MOCK_STAT_METRICS } from "@/lib/mock-data";
 import { StatMetric } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -16,30 +16,26 @@ import { cn } from "@/lib/utils";
 const iconMap = {
   Stethoscope: Stethoscope,
   Users: Users,
+  BarChart3: BarChart3,
   CalendarCheck: CalendarCheck,
-  Activity: Activity,
 };
 
 const themeStyles = {
   teal: {
     iconBg: "bg-teal-50 text-teal-600 ring-teal-500/10",
     badge: "text-teal-700 bg-teal-50/80 border-teal-200",
-    gradient: "from-teal-500/10 to-transparent",
   },
   emerald: {
     iconBg: "bg-emerald-50 text-emerald-600 ring-emerald-500/10",
     badge: "text-emerald-700 bg-emerald-50/80 border-emerald-200",
-    gradient: "from-emerald-500/10 to-transparent",
   },
   sky: {
     iconBg: "bg-sky-50 text-sky-600 ring-sky-500/10",
     badge: "text-sky-700 bg-sky-50/80 border-sky-200",
-    gradient: "from-sky-500/10 to-transparent",
   },
   amber: {
     iconBg: "bg-amber-50 text-amber-600 ring-amber-500/10",
     badge: "text-amber-700 bg-amber-50/80 border-amber-200",
-    gradient: "from-amber-500/10 to-transparent",
   },
 };
 
@@ -47,15 +43,15 @@ export function StatCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
       {MOCK_STAT_METRICS.map((metric: StatMetric) => {
-        const IconComponent = iconMap[metric.icon as keyof typeof iconMap] || TrendingUp;
+        const IconComponent =
+          iconMap[metric.icon as keyof typeof iconMap] || TrendingUp;
         const style = themeStyles[metric.colorScheme] || themeStyles.teal;
 
         return (
           <Card
             key={metric.id}
-            className="relative overflow-hidden border-slate-200/90 hover:shadow-md transition-all duration-200"
+            className="relative overflow-hidden border-slate-200/90 shadow-xs hover:shadow-md transition-all duration-200"
           >
-            {/* Ambient subtle top edge gradient */}
             <div
               className={cn(
                 "absolute inset-x-0 top-0 h-1 bg-gradient-to-r",
@@ -73,7 +69,7 @@ export function StatCards() {
                 </span>
                 <div
                   className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-xl ring-4 transition-transform group-hover:scale-105",
+                    "flex h-10 w-10 items-center justify-center rounded-xl ring-4 transition-transform",
                     style.iconBg
                   )}
                 >
@@ -110,4 +106,3 @@ export function StatCards() {
     </div>
   );
 }
-

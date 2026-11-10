@@ -1,15 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { Sidebar } from "./sidebar";
-import { MobileSidebar } from "./mobile-sidebar";
-import { Header } from "./header";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { MobileSidebar } from "@/components/layout/MobileSidebar";
+import { Header } from "@/components/layout/Header";
 
-interface AppShellProps {
+interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export function AppShell({ children }: AppShellProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
@@ -36,12 +36,8 @@ export function AppShell({ children }: AppShellProps) {
         </main>
 
         <footer className="border-t border-slate-200/80 bg-white/50 px-6 py-4 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>Doctor Tracker v1.0 • Phase 1 Frontend Interface</span>
-          <div className="flex items-center gap-4">
-            <span className="hover:text-slate-600 cursor-pointer">HIPAA Compliant Protocol</span>
-            <span>•</span>
-            <span className="hover:text-slate-600 cursor-pointer">System Telemetry</span>
-          </div>
+          <span>Doctor Tracker &bull; Administrative Web Application</span>
+          <span>Performance Optimized &bull; Clean UX</span>
         </footer>
       </div>
     </div>
