@@ -20,7 +20,8 @@ const conditionCategories = [
 ];
 
 export default function PatientsPage() {
-  const [patientsList, setPatientsList] = React.useState<Patient[]>(MOCK_PATIENTS);
+  const [patientsList, setPatientsList] =
+    React.useState<Patient[]>(MOCK_PATIENTS);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedCondition, setSelectedCondition] = React.useState("all");
   const [dateFilter, setDateFilter] = React.useState("all");
@@ -33,7 +34,7 @@ export default function PatientsPage() {
 
   const handleEditPatient = (updated: Patient) => {
     setPatientsList((prev) =>
-      prev.map((p) => (p.id === updated.id ? updated : p))
+      prev.map((p) => (p.id === updated.id ? updated : p)),
     );
   };
 
@@ -51,11 +52,13 @@ export default function PatientsPage() {
         p.patientCondition.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesCondition =
-        selectedCondition === "all" || p.conditionCategory === selectedCondition;
+        selectedCondition === "all" ||
+        p.conditionCategory === selectedCondition;
 
       const matchesDate =
         dateFilter === "all" ||
-        (dateFilter === "this-month" && p.registeredDate.startsWith("2026-11")) ||
+        (dateFilter === "this-month" &&
+          p.registeredDate.startsWith("2026-11")) ||
         (dateFilter === "last-30" && p.registeredDate >= "2026-10-10") ||
         (dateFilter === "2026" && p.registeredDate.startsWith("2026"));
 
@@ -76,7 +79,8 @@ export default function PatientsPage() {
           </span>
         </div>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Dedicated patient page: list all patients, edit details, delete records, search, filter date-wise and by condition.
+          Dedicated patient page: list all patients, edit details, delete
+          records, search, filter date-wise and by condition.
         </p>
       </div>
 
