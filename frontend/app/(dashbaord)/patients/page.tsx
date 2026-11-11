@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { PatientsTable } from "@/components/patients/PatientsTable";
 import { Pagination } from "@/components/ui/Pagination";
+import { AddPatientButton } from "@/components/patients/AddPatientButton";
 import { BackendPatientRecord, Patient } from "@/lib/types";
 import {
   useDeletePatient,
@@ -125,25 +126,31 @@ export default function PatientsPage() {
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* Page Header */}
-      <div className="pb-2 border-b border-slate-200/60">
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-            Patients Management
-          </h1>
-          <span className="inline-flex items-center rounded-md bg-teal-50 px-2 py-0.5 text-xs font-semibold text-teal-700 border border-teal-200">
-            {totalCount} Patients
-          </span>
-          {isFetching && (
-            <span className="inline-flex items-center gap-1 text-[11px] text-teal-600">
-              <Loader2 className="h-3 w-3 animate-spin" />
-              Syncing
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200/60">
+        <div>
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+              Patients Management
+            </h1>
+            <span className="inline-flex items-center rounded-md bg-teal-50 px-2 py-0.5 text-xs font-semibold text-teal-700 border border-teal-200">
+              {totalCount} Patients
             </span>
-          )}
+            {isFetching && (
+              <span className="inline-flex items-center gap-1 text-[11px] text-teal-600">
+                <Loader2 className="h-3 w-3 animate-spin" />
+                Syncing
+              </span>
+            )}
+          </div>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Dedicated patient page: list all patients, edit details, delete
+            records, search, and filter date-wise and by condition.
+          </p>
         </div>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Dedicated patient page: list all patients, edit details, delete
-          records, search, and filter date-wise and by condition.
-        </p>
+
+        <div className="flex items-center gap-2">
+          <AddPatientButton />
+        </div>
       </div>
 
       {/* Visual Search & Condition/Date-wise Filter Controls */}

@@ -52,14 +52,15 @@ export default function DoctorsPage() {
   const handleAddPatientToDoctor = (
     doctorId: string,
     patientName: string,
-    patientCondition: string
+    patientCondition: string,
+    patientPhone?: string
   ) => {
     addPatientMutation.mutate({
       doctorId,
       data: {
         name: patientName,
         condition: patientCondition,
-        phone: "+1 (555) 000-0000",
+        phone: patientPhone || "+1 (555) 000-0000",
       },
     });
   };

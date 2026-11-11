@@ -30,7 +30,8 @@ interface DoctorsTableProps {
   onAddPatient?: (
     doctorId: string,
     patientName: string,
-    patientCondition: string
+    patientCondition: string,
+    patientPhone?: string
   ) => void;
   onDeletePatient?: (doctorId: string, patientId: string) => void;
 }
@@ -46,6 +47,7 @@ export function DoctorsTable({
   const [isAddingPatient, setIsAddingPatient] = React.useState(false);
   const [newPatientName, setNewPatientName] = React.useState("");
   const [newPatientCondition, setNewPatientCondition] = React.useState("");
+  const [newPatientPhone, setNewPatientPhone] = React.useState("");
   const [actionNotice, setActionNotice] = React.useState<string | null>(null);
 
   const selectedDoctor = React.useMemo(() => {
@@ -66,11 +68,13 @@ export function DoctorsTable({
     onAddPatient?.(
       selectedDoctorId,
       newPatientName.trim(),
-      newPatientCondition.trim()
+      newPatientCondition.trim(),
+      newPatientPhone.trim() || "+1 (555) 000-0000"
     );
     setActionNotice(`Added ${newPatientName} under ${selectedDoctor?.name}.`);
     setNewPatientName("");
     setNewPatientCondition("");
+    setNewPatientPhone("");
     setIsAddingPatient(false);
   };
 
@@ -269,18 +273,24 @@ export function DoctorsTable({
                 <div className="font-semibold text-slate-800">
                   Add New Patient Under {selectedDoctor.name}
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <Input
-                    placeholder="Patient Name"
+                    placeholder="Patient Name *"
                     value={newPatientName}
                     onChange={(e) => setNewPatientName(e.target.value)}
                     required
                   />
                   <Input
-                    placeholder="Medical Condition (e.g. Hypertension)"
+                    placeholder="Medical Condition *"
                     value={newPatientCondition}
                     onChange={(e) => setNewPatientCondition(e.target.value)}
                     required
+                  />
+                  <Input
+                    placeholder="Phone (optional)"
+                    type="tel"
+                    value={newPatientPhone}
+                    onChange={(e) => setNewPatientPhone(e.target.value)}
                   />
                 </div>
                 <div className="flex justify-end gap-2">
